@@ -22,15 +22,19 @@ export async function invokeStructured<T extends z.ZodType>(
 
     logger.debug(`Structured output received from ${nodeName}`, { node: nodeName });
     return result;
-  } catch (error) {
+  } catch (error: any) {
   console.error("================================");
   console.error("GEMINI RAW ERROR");
-  console.error(error);
+  console.error(JSON.stringify(error, null, 2));
   console.error("================================");
+  if (error?.cause) {
+    console.error("CAUSE:");
+    console.error(JSON.stringify(error.cause, null, 2));
+  }
 
   throw new NodeExecutionError(
     nodeName,
-    "Failed to generate structured output from Gemini",
+    `Failed to generate structured output from Gemini: ${error?.message || "Unknown error"}`,
     error,    
     );
   }
