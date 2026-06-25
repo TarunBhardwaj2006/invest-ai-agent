@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0",
     "@langchain/core": "^0.3.0",
     "@langchain/google-genai": "^0.1.0",
     "@langchain/langgraph": "^0.2.0",
